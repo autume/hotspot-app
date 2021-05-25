@@ -186,11 +186,21 @@ const DiscoveryModeResultsCard = ({
   }, [selectedHotspotIndex])
 
   return (
-    <Box position="absolute" bottom={0} left={0} right={0} minHeight={210}>
-      {!!selectedHotspots?.length && selectedHotspots.length > 1 && (
+    <Box
+      position="absolute"
+      bottom={0}
+      left={0}
+      right={0}
+      minHeight={410}
+      justifyContent="flex-end"
+    >
+      {!!selectedHotspots?.length && (
         <ContentPill
           selectedIndex={selectedHotspotIndex}
           data={pillData}
+          style={{
+            marginStart: selectedHotspots.length > 1 ? undefined : -100,
+          }}
           onPressItem={setSelectedHotspotIndex}
           marginBottom="lx"
           maxWidth={wp(90)}

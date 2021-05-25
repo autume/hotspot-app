@@ -64,7 +64,9 @@ const DiscoveryModeResultsCardItem = ({
         borderRadius="l"
         overflow="hidden"
         alignItems="center"
+        marginHorizontal="ms"
         flexDirection="row"
+        width="100%"
       >
         <BlurBox
           top={0}
@@ -75,26 +77,31 @@ const DiscoveryModeResultsCardItem = ({
           opacity={0.6}
           position="absolute"
         />
-        <Box flex={1} flexDirection="row" alignItems="center">
-          <FollowButton
-            address={address}
-            padding="m"
-            handleChange={handleFollowChange}
-          />
-          <RewardScaleIco />
-          <Text
-            variant="regular"
-            fontSize={11}
-            color="white"
-            marginLeft="xs"
-            paddingRight="m"
-          >
-            {rewardScale?.toFixed(2)}
-          </Text>
-          <Text variant="medium" fontSize={16} color="white">
-            {startCase(name)}
-          </Text>
-        </Box>
+        <FollowButton
+          address={address}
+          padding="m"
+          handleChange={handleFollowChange}
+        />
+        <RewardScaleIco />
+        <Text
+          variant="regular"
+          fontSize={11}
+          color="white"
+          marginLeft="xs"
+          paddingRight="m"
+        >
+          {rewardScale?.toFixed(2)}
+        </Text>
+        <Text
+          variant="medium"
+          fontSize={16}
+          color="white"
+          numberOfLines={1}
+          adjustsFontSizeToFit
+          flex={1}
+        >
+          {startCase(name)}
+        </Text>
         <TouchableOpacityBox padding="m" onPress={hideOverlay}>
           <Close height={22} width={22} color="white" opacity={0.6} />
         </TouchableOpacityBox>
