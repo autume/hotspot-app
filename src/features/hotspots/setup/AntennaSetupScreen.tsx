@@ -1,11 +1,14 @@
 import React, { useCallback, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useNavigation } from '@react-navigation/native'
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { getCountry } from 'react-native-localize'
 import { useSelector } from 'react-redux'
 import { KeyboardAvoidingView, StyleSheet } from 'react-native'
 import Box from '../../../components/Box'
-import { HotspotSetupNavigationProp } from './hotspotSetupTypes'
+import {
+  HotspotSetupNavigationProp,
+  HotspotSetupStackParamList,
+} from './hotspotSetupTypes'
 import BackScreen from '../../../components/BackScreen'
 import Text from '../../../components/Text'
 import Button from '../../../components/Button'
@@ -17,9 +20,12 @@ import { useAppDispatch } from '../../../store/store'
 import { RootState } from '../../../store/rootReducer'
 import { Antenna, Antennas } from '../../../constants/antennas'
 
+type Route = RouteProp<HotspotSetupStackParamList, 'AntennaSetupScreen'>
+
 const AntennaSetupScreen = () => {
   const { t } = useTranslation()
   const navigation = useNavigation<HotspotSetupNavigationProp>()
+  const { params } = useRoute<Route>()
   const colors = useColors()
   const dispatch = useAppDispatch()
   const hotspotType = useSelector(
@@ -56,8 +62,8 @@ const AntennaSetupScreen = () => {
     dispatch(hotspotOnboardingSlice.actions.setElevation(elevation))
     dispatch(hotspotOnboardingSlice.actions.setGain(gain))
     dispatch(hotspotOnboardingSlice.actions.setAntenna(antenna))
-    navigation.navigate('HotspotSetupConfirmLocationScreen')
-  }, [antenna, dispatch, elevation, gain, navigation])
+    navigation.navigate('HotspotSetupConfirmLocationScreen', params)
+  }, [antenna, dispatch, elevation, gain, navigation, params])
 
   return (
     <BackScreen>
