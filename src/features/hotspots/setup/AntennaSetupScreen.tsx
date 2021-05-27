@@ -19,18 +19,22 @@ import hotspotOnboardingSlice from '../../../store/hotspots/hotspotOnboardingSli
 import { useAppDispatch } from '../../../store/store'
 import { RootState } from '../../../store/rootReducer'
 import { Antenna, Antennas } from '../../../constants/antennas'
+import { RootNavigationProp } from '../../../navigation/main/tabTypes'
 
 type Route = RouteProp<HotspotSetupStackParamList, 'AntennaSetupScreen'>
 
 const AntennaSetupScreen = () => {
   const { t } = useTranslation()
   const navigation = useNavigation<HotspotSetupNavigationProp>()
+  const rootNav = useNavigation<RootNavigationProp>()
   const { params } = useRoute<Route>()
   const colors = useColors()
   const dispatch = useAppDispatch()
   const hotspotType = useSelector(
     (state: RootState) => state.hotspotOnboarding.hotspotType,
   )
+
+  const handleClose = useCallback(() => rootNav.navigate('MainTabs'), [rootNav])
 
   const defaultAntenna = useMemo(() => {
     const country = getCountry()
@@ -66,7 +70,7 @@ const AntennaSetupScreen = () => {
   }, [antenna, dispatch, elevation, gain, navigation, params])
 
   return (
-    <BackScreen>
+    <BackScreen onClose={handleClose}>
       <KeyboardAvoidingView
         style={styles.keyboardAvoidingView}
         behavior="padding"
