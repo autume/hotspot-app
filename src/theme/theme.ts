@@ -319,7 +319,6 @@ export const theme = createTheme({
       borderRadius: 'm',
     },
     light: {
-      backgroundColor: 'grayBox',
       fontFamily: Font.main.regular,
       fontSize: 18,
       color: 'black',
